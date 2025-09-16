@@ -8,7 +8,10 @@
 let count = 0;
 const reactRoot = ReactDOM.createRoot(document.getElementById('app'));
 function main() {
-  const app = /*#__PURE__*/React.createElement("div", null, "Z\xE4hle: ", /*#__PURE__*/React.createElement("span", null, count), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("button", {
+  const app = /*#__PURE__*/React.createElement("div", null, "Z\xE4hle: "
+    , /*#__PURE__*/React.createElement("span", null, count)
+    , /*#__PURE__*/React.createElement("br", null)
+    , /*#__PURE__*/React.createElement("button", {
     onClick: () => {
       ++count;
       main();
