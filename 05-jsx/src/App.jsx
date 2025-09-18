@@ -1,6 +1,7 @@
 import BpComponentProps from "./components/bp-component-props copy"
 import CamelCase from "./components/camel-case"
 import ClosingTags from "./components/closing-tags"
+import ComponentChildren from "./components/component-children"
 import ComponentProps from "./components/component-props"
 import DynamicProps from "./components/dynamic-props"
 import Interpolation from "./components/interpolation"
@@ -91,15 +92,27 @@ function App() {
             <ComponentProps vorname={"Siri"} nachname="Luck" nr={1} klasse="FIAE39" />
             <ComponentProps vorname={"Max"} nachname="Mustermann" nr={2} klasse="KFF" />
             {/* Best Practice : Deconstructure */}
-            <BpComponentProps vorname="Mike" nachname="Muster" nr={3} klasse="FISI39"  />
+            <BpComponentProps vorname="Mike" nachname="Muster" nr={3} klasse="FISI39" />
             {/* Object */}
             <ObjectComponentProps tn={{ vorname: 'Yoyo', nachname: 'Master', nr: 4, klasse: "Nö" }} />
-            <ObjectComponentProps tn={tnListe[0]} /> 
+            <ObjectComponentProps tn={tnListe[0]} />
             <ComponentProps {...tnListe[1]} />
           </ul>
         </div>
       </section>
 
+      {/* 7.Children */}
+      <section>
+        <h2>Component Children</h2>
+        <p>
+          JSX Content eines Elementes wird über die Children-Property bereitgestellt
+        </p>
+        <div>
+          <ComponentChildren color="green" title="Ein Beispiel" >
+            <p>Das ist mein Content!</p>
+          </ComponentChildren>
+        </div>
+      </section>
 
     </main>
   )
