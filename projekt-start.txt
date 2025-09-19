@@ -1,0 +1,21 @@
+# Projektstart
+
+## Mit Create Vite
+
+npm create vite <ordnername>
+    - Dann eventuell Paketnamen angeben
+    - React -> JavaScript auswählen
+
+cd <ordnername>
+npm install
+code .
+npm run dev
+
+## Mit Template Folder
+
+Kopie des Ordners anlegen: <neuer-name>
+
+cd <neuer-name>
+npm install
+code .
+npm run dev

@@ -1,14 +1,17 @@
 import TodoFilter from "./todo-filter";
 
-export default function TodoToolBar() {
+export default function TodoToolBar( { todos } ) {
+    const activeCount = todos.filter( t => !t.completed).length ;
+    //const hasCompleted = todos.filter( t => t.completed).length !== 0; 
+    const hasCompleted = todos.some( t => t.completed); 
+    
+
     return <>
         <footer className="footer">
-            {/* <!-- This should be `0 items left` by default --> */}
-            <span className="todo-count"><strong>0</strong> item left</span>
-            {/* <!-- Remove this if you don't implement routing --> */}
+            <span className="todo-count"><strong> { activeCount } </strong> item{ activeCount > 1 && 's' } left</span>
             <TodoFilter />
             {/* <!-- Hidden if no completed items are left ↓ --> */}
-            <button className="clear-completed">Clear completed</button>
+            { hasCompleted && <button className="clear-completed">Clear completed</button> }
         </footer>
     </>
 }
