@@ -1,0 +1,9 @@
+:root {
+  font-family: system-ui;
+}
+
+:root {
+  /* CSS Variablen für Design Tokens */
+  --farbe-primary: #123456;
+  --rundung-default: '6px';
+}
