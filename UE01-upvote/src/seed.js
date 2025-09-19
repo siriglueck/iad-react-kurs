@@ -34,6 +34,15 @@ const submissions = [
         votes: 9,
         avatar: '/img/avatars/molly.png',
         submissionImage: '/img/submissions/image-aqua.png',
+    },
+    {
+        id: 5,
+        title: 'React React React',
+        description: 'Yoohoooooooo',
+        url: '#',
+        votes: 999,
+        avatar: '/img/avatars/siri-icon.png',
+        submissionImage: '/img/submissions/image-aqua.png',
     }
 ];
 
