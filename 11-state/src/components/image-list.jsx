@@ -7,11 +7,14 @@ export default function ImageList() {
     const sculpture = sculptureList[index];
 
     function nextIndex() {
-        setIndex((index + 1) % sculptureList.length);
+        //setIndex((index + 1) % sculptureList.length);
+        //False wrong syntax, index < sculptureList.length-1 ? setIndex(index+1) : setIndex(0);
+        setIndex(index < sculptureList.length - 1 ? index + 1 : 0);
     }
 
     function prevIndex() {
-        setIndex((index - 1 + sculptureList.length) % sculptureList.length);
+        //setIndex((index - 1 + sculptureList.length) % sculptureList.length);
+        setIndex(index > 0 ? index - 1 : sculptureList.length - 1);
     }
 
     return <>
