@@ -3,14 +3,14 @@ import { useRef, useState } from "react";
 export function StateList() {
 
     // In State umsetzen
-
     const [points, setPoints] = useState([
-        { nr: 1, x: 47, y: 176 },
-        { nr: 2, x: 147, y: 17 },
-        { nr: 3, x: 89, y: 120 }
+        // {nr:1, x:10,y: 20},
+        // {nr:1, x:10,y: 20},
+        // {nr:1, x:10,y: 20},
     ]);
-
+    const [color, setColor] = useState('#0000ff');
     const divRef = useRef(null);
+    const thickRef = useRef(null);
 
     // Click zuordnen
     function createPoint(ev) {
@@ -18,7 +18,7 @@ export function StateList() {
         const nr = (points.at(-1)?.nr || 0) + 1;
         // x und y berechnen (aus divRef und ev)
         const divElt = divRef.current;
-        const point = { nr,
+        const point = { nr, color, thickness: thickRef.current.value,
             x: ev.pageX - divElt.offsetLeft,
             y: ev.pageY - divElt.offsetTop
         };
@@ -42,18 +42,18 @@ export function StateList() {
                     position: 'absolute',
                     left: `${pos.x}px`,
                     top: `${pos.y}px`,
-                    height: '16px',
-                    width: '16px',
-                    backgroundColor: 'blue',
-                    borderRadius: '16px',
+                    height: `${pos.thickness}px`,
+                    width: `${pos.thickness}px`,
+                    backgroundColor: pos.color || 'blue',
+                    borderRadius: '50%',
                     transform: 'translate3d(-8px,-8px,0)',
                     transition: 'all 100ms ease-in-out'
                 }}></div>
             ))}
         </div>
         <div>
-            <input type="color" value={'#0000ff'} />
-            <input type="range" min={1} max={16} value={16} />
+            <input type="color" value={color} onChange={(ev)=> setColor(ev.target.value)} />
+            <input ref={thickRef} type="range" min={1} max={16} defaultValue={8} />
         </div>
     </>
 }
