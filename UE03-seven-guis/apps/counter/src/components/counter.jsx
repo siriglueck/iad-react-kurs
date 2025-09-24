@@ -7,7 +7,7 @@ export function Counter() {
 
   return <>
     <div className="box bordered">
-      <input type="number" readOnly value={num} onChange={(ev)=> setNum(ev.target.value)} />
+      <input type="number" readOnly value={num}/>
       <button className="btn" onClick={() => setNum(num+1)}>Count</button>
     </div>
   </>
