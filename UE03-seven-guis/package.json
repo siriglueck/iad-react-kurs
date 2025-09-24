@@ -1,0 +1,29 @@
+{
+  "name": "seven-guis",
+  "version": "0.0.0",
+  "type": "module",
+  "workspaces": [
+    "./apps/*",
+    "./packages/*"
+  ],
+  "scripts": {
+    "cells": "npm run dev --workspace=cells",
+    "circle-drawer": "npm run dev --workspace=circle-drawer",
+    "counter": "npm run dev --workspace=counter",
+    "crud": "npm run dev --workspace=crud",
+    "flight-booker": "npm run dev --workspace=flight-booker",
+    "temperature-comverter": "npm run dev --workspace=temperature-comverter",
+    "timer": "npm run dev --workspace=timer",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@stylistic/eslint-plugin": "^5.4.0",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "eslint": "^9.36.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.4.0"
+  }
+}
