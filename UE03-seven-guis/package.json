@@ -12,7 +12,7 @@
     "counter": "npm run dev --workspace=counter",
     "crud": "npm run dev --workspace=crud",
     "flight-booker": "npm run dev --workspace=flight-booker",
-    "temperature-comverter": "npm run dev --workspace=temperature-comverter",
+    "temperature-converter": "npm run dev --workspace=temperature-converter",
     "timer": "npm run dev --workspace=timer",
     "lint": "eslint ."
   },
