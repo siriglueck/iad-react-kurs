@@ -1,9 +1,7 @@
-
 function App() {
- 
   return (
     <div>Template</div>
-  )
+  );
 }
 
-export default App
+export default App;
