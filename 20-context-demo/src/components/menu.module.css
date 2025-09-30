@@ -1,0 +1,20 @@
+.item, .trigger {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    padding: 0.5rem 1rem;
+}
+
+.popover {
+    position: fixed;
+    position-area: bottom right;
+    margin: 0.5rem 0 0 -2rem;
+    background-color: white;
+    border: 1px solid #eee;
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
