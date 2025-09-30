@@ -1,8 +1,8 @@
-import { hashToFilter } from '../lib/hash-to-filter';
+import { useFilter } from '../lib/use-filter';
 import { TodosItem } from './todos-item';
 
 export function TodosList({ todos, onToggle, onDelete }) {
-  const currentFilter = hashToFilter();
+  const currentFilter = useFilter();
 
   const filteredTodos = currentFilter === 'all'
     ? todos

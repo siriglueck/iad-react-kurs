@@ -1,7 +1,7 @@
-import { hashToFilter } from '../lib/hash-to-filter';
+import { useFilter } from '../lib/use-filter';
 
 export function TodosFilter() {
-  const currentFilter = hashToFilter();
+  const currentFilter = useFilter();
 
   return (
     <ul className="filters">

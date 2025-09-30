@@ -3,18 +3,11 @@ import { getAll } from '../api/todos';
 import { TodosInputModern } from './todos-input';
 import { TodosMain } from './todos-main';
 import { TodosToolbar } from './todos-toolbar';
-import { hashToFilter } from '../lib/hash-to-filter';
+import { FilterProvider } from '../lib/filter-context';
 
 export function TodosShell() {
   // Funktioniert ganz gut, weil dieses getAll synchron ist
   const [todos, setTodos] = useState(() => getAll());
-  // Workaround for an effect (hacky)
-  const [, setFilter] = useState(() => {
-    window.onhashchange = () => {
-      setFilter(hashToFilter());
-    };
-    return hashToFilter();
-  });
 
   function createTodo(title) {
     const todo = { id: (todos.at(-1)?.id || 0) + 1, title, completed: false };
@@ -34,18 +27,20 @@ export function TodosShell() {
   }
 
   return (
-    <section className="todoapp">
-      <header className="header">
-        <h1>todos</h1>
-        <TodosInputModern onCreate={createTodo} />
-      </header>
+    <FilterProvider>
+      <section className="todoapp">
+        <header className="header">
+          <h1>todos</h1>
+          <TodosInputModern onCreate={createTodo} />
+        </header>
 
-      {todos.length > 0 && (
-        <>
-          <TodosMain todos={todos} onToggle={toggleTodo} onDelete={deleteTodo} />
-          <TodosToolbar todos={todos} onDeleteCompleted={deleteCompletedTodos} />
-        </>
-      )}
-    </section>
+        {todos.length > 0 && (
+          <>
+            <TodosMain todos={todos} onToggle={toggleTodo} onDelete={deleteTodo} />
+            <TodosToolbar todos={todos} onDeleteCompleted={deleteCompletedTodos} />
+          </>
+        )}
+      </section>
+    </FilterProvider>
   );
 }
