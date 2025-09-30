@@ -1,8 +1,10 @@
 import { useFilter } from '../lib/use-filter';
+import { useTodos } from '../store/todos';
 import { TodosItem } from './todos-item';
 
-export function TodosList({ todos, onToggle, onDelete }) {
+export function TodosList() {
   const currentFilter = useFilter();
+  const todos = useTodos(state => state.todos);
 
   const filteredTodos = currentFilter === 'all'
     ? todos

@@ -1,16 +1,21 @@
 import { useState } from 'react';
+import { useTodos } from '../store/todos';
 
-export function TodosItem({ todo, onToggle, onDelete }) {
+export function TodosItem({ todo }) {
   const [isEditing, setEditing] = useState(false);
+  const toggle = useTodos(state => state.toggle);
+  const remove = useTodos(state => state.remove);
 
   function deleteTodo() {
     console.log('Delete Todo', todo.title);
-    onDelete(todo);
+    remove(todo);
+    // onDelete(todo);
   }
 
   function toggleTodo() {
     console.log('Toggle Todo', todo.title);
-    onToggle(todo);
+    toggle(todo);
+    // onToggle(todo);
   }
 
   function beginEdit() {
