@@ -55,7 +55,7 @@ export function WrongEffect2() {
       </select>
       Angelegt am
       {' '}
-      {accData.create_at}
+      {accData.created_at}
     </>
   );
 }
