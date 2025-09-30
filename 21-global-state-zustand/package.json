@@ -12,7 +12,6 @@
   "dependencies": {
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "todomvc-app-css": "^2.4.3",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
