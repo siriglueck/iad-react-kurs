@@ -1,0 +1,16 @@
+{
+    "users": [
+        {
+            "id": "facebook",
+            "created_at": "2009-04-01T10:58:52.782Z"
+        },
+        {
+            "id": "angular",
+            "created_at": "2010-10-01T10:58:52.782Z"
+        },
+        {
+            "id": "vuejs",
+            "created_at": "2013-10-01T10:58:52.782Z"
+        }
+    ]
+}

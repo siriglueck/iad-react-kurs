@@ -1,0 +1,7 @@
+:root {
+  font-family: system-ui;
+}
+
+a[aria-current=page] {
+  background-color: #ddd;
+}
