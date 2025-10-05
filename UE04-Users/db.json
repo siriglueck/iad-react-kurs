@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "firstName": "Micha",
+      "lastName": "Doe",
+      "email": "john.doe@example.com",
+      "role": "Admin",
+      "status": "active",
+      "id": "1",
+      "createdAt": "2024-01-15T10:30:00Z"
+    },
+    {
+      "id": "2",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "email": "jane.smith@example.com",
+      "role": "User",
+      "status": "active",
+      "createdAt": "2024-02-20T14:20:00Z"
+    },
+    {
+      "id": "3",
+      "firstName": "Bob",
+      "lastName": "Johnson",
+      "email": "bob.johnson@example.com",
+      "role": "User",
+      "status": "inactive",
+      "createdAt": "2024-03-10T09:15:00Z"
+    },
+    {
+      "firstName": "Micha",
+      "lastName": "Buchholz",
+      "email": "mail@lean-stack.de",
+      "role": "Manager",
+      "status": "active",
+      "id": "e4af",
+      "createdAt": "2025-10-02T12:42:33.208Z"
+    }
+  ]
+}
