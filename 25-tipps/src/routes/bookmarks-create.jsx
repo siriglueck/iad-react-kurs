@@ -6,7 +6,7 @@ import { useSearchParams } from 'react-router';
 // 3. Use the platform
 export default function BookMarksCreateRoute() {
   const [searchParams] = useSearchParams();
-
+  const [errors, setErrors] = useState({});
   const url = searchParams.get('url') || '';
 
   function handleSubmit(e) {
@@ -15,21 +15,45 @@ export default function BookMarksCreateRoute() {
     const formData = new FormData(e.target); // recreate the data from the form
     const bookmark = Object.fromEntries(formData);
 
-    // Todo: Validate
-    console.log(bookmark);
+    let hasError = false;
+
+    // Todo: Validate again
+    // some browser do not validate the form, or some users can bypass it
+    if (!bookmark.url.trim()) {
+      setErrors(err => ({ ...err, url: 'Muss ausgefüllt werden' }));
+      hasError = true;
+    }
+    else if (!/^http(s)?:\/\//.test(bookmark.url)) {
+      setErrors(err => ({ ...err, url: 'Protolkoll fehlt' }));
+      hasError = true;
+    }
+
+    if (!bookmark.title.trim()) {
+      setErrors(err => ({ ...err, title: 'Muss ausgefüllt werden' }));
+      hasError = true;
+    }
+    else {
+      setErrors(err => ({ ...err, title: '' }));
+    }
+
+    if (!hasError) {
+      console.log(bookmark);
+    }
   }
 
   return (
     <div>
       <h1>Neues Lesezeichen</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate>
         <div>
           <label htmlFor="url">URL: </label>
           <input required id="url" name="url" defaultValue={url} type="url" placeholder="https://server.com" />
+          {errors.url && <span>{errors.url}</span>}
         </div>
         <div>
           <label htmlFor="title">Titel: </label>
-          <input required type="text" id="title" name="titel" />
+          <input required type="text" id="title" name="title" />
+          {errors.title && <span>{errors.title}</span>}
         </div>
         <div>
           <label htmlFor="description">Notizen: </label>
