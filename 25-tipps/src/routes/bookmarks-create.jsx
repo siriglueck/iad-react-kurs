@@ -1,9 +1,10 @@
 import { useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router';
 
 // To get data from the form
 
-// 3. Use the platform
+// 3. Use the platform - Best Practice
 export default function BookMarksCreateRoute() {
   const [searchParams] = useSearchParams();
   const [errors, setErrors] = useState({});
@@ -15,30 +16,32 @@ export default function BookMarksCreateRoute() {
     const formData = new FormData(e.target); // recreate the data from the form
     const bookmark = Object.fromEntries(formData);
 
-    let hasError = false;
+    let hasErrors = false;
 
-    // Todo: Validate again
-    // some browser do not validate the form, or some users can bypass it
+    // TODO: Validate!
     if (!bookmark.url.trim()) {
       setErrors(err => ({ ...err, url: 'Muss ausgefüllt werden' }));
-      hasError = true;
+      hasErrors = true;
     }
     else if (!/^http(s)?:\/\//.test(bookmark.url)) {
-      setErrors(err => ({ ...err, url: 'Protolkoll fehlt' }));
-      hasError = true;
+      setErrors(err => ({ ...err, url: 'Protokoll fehlt.' }));
+      hasErrors = true;
+    }
+    else {
+      setErrors(err => ({ ...err, url: '' }));
     }
 
     if (!bookmark.title.trim()) {
-      setErrors(err => ({ ...err, title: 'Muss ausgefüllt werden' }));
-      hasError = true;
+      setErrors(err => ({ ...err, title: 'Nicht nur Leerzeichen bitte ' }));
+      hasErrors = true;
     }
     else {
       setErrors(err => ({ ...err, title: '' }));
     }
 
-    if (!hasError) {
+    if (!hasErrors)
       console.log(bookmark);
-    }
+  
   }
 
   return (
@@ -61,6 +64,43 @@ export default function BookMarksCreateRoute() {
         </div>
         <div>
           <button type="submit">Speichen</button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+export function BookmarksCreateRouteReactHookUseForm() {
+  const [searchParams] = useSearchParams();
+  const url = searchParams.get('url') || '';
+
+  const form = useForm();
+  const { formState: { errors } } = form; // Destructuring - durchaus auch gleich beim Hook benutzen
+
+  function handleSubmit(bookmark) {
+    console.log(bookmark);
+  }
+
+  return (
+    <div>
+      <h1>Neues Lesezeichen</h1>
+      <form onSubmit={form.handleSubmit(handleSubmit)}>
+        <div>
+          <label htmlFor="url">URL: </label>
+          <input defaultValue={url} id="url" type="url" {...form.register('url', { required: true })} placeholder="https://server.com" />
+          {errors.url && <span>Ungültige URL</span>}
+        </div>
+        <div>
+          <label htmlFor="title">Titel: </label>
+          <input type="text" id="title" {...form.register('title', { required: true, pattern: /.*\w+.*/ })} />
+          {errors.title && <span>Titel darf nicht leer sein</span>}
+        </div>
+        <div>
+          <label htmlFor="descr">Notizen: </label>
+          <input id="descr" {...form.register('descr')} />
+        </div>
+        <div>
+          <button type="submit">Speichern</button>
         </div>
       </form>
     </div>
