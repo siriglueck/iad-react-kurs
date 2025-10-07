@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
 export function CreatePage() {
-  // to get value from URL
   const { title } = useParams();
   const [data, setData] = useState(null);
   const navigate = useNavigate();

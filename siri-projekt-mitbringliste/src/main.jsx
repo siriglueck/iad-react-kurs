@@ -7,6 +7,7 @@ import { PageLayout } from './pages/_layout';
 import { CreatePage } from './pages/create';
 import { NotFoundPage } from './pages/notfound';
 import { DetailsPage } from './pages/details';
+import { Toaster } from 'react-hot-toast';
 
 const router = createBrowserRouter([
   { index: true, element: <StartPage /> },
@@ -22,5 +23,6 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router={router} />
+    <Toaster position="top-right" />
   </StrictMode>,
 );
