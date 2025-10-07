@@ -4,8 +4,8 @@ export default function StartPage() {
   const navigate = useNavigate();
 
   function handleSubmit(formData) {
-    const listTitle = formData.get('title');
-    navigate('/create/' + encodeURIComponent(listTitle));
+    const listTitle = formData.get('title').trim();
+    navigate(listTitle ? '/create/' + encodeURIComponent(listTitle) : '/create');
   }
 
   return (

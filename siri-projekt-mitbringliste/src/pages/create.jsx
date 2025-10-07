@@ -46,6 +46,8 @@ export function CreatePage() {
             <div className="flex flex-col">
               <label htmlFor="title" className="text-stone-700 mb-1 font-medium">
                 Titel der Liste
+                {' '}
+                <span className="text-red-500">*</span>
               </label>
               <input
                 id="title"
@@ -75,6 +77,8 @@ export function CreatePage() {
             <div className="flex flex-col">
               <label htmlFor="email" className="text-stone-700 mb-1 font-medium">
                 Deine E-Mail-Adresse
+                {' '}
+                <span className="text-red-500">*</span>
               </label>
               <input
                 id="email"
