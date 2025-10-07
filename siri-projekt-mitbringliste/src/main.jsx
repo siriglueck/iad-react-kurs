@@ -14,6 +14,7 @@ const router = createBrowserRouter([
     { path: '/create', element: <CreatePage /> },
     { path: '/create/:title', element: <CreatePage /> },
     { path: '/list/:key', element: <DetailsPage /> },
+    { path: '/list/:key/entry/:submissionkey', element: <DetailsPage /> },
     { path: '*', element: <NotFoundPage /> },
   ] },
 ]);

@@ -1,19 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
 export function DetailsPage() {
-  const { key } = useParams();
-  const [data, setData] = useState(null);
+  const { key, submissionkey } = useParams();
+  const [, setData] = useState(null);
+  const [dataForLooping, setForLooping] = useState(null);
   const navigate = useNavigate();
 
-  const testKey = 'wwlse7';
+  console.log(key, submissionkey);
+
+  function handleClick(smKey) {
+    navigate(`/list/${key}/entry/${smKey}`);
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const guestList = Object.fromEntries(formData);
 
-    fetch(`http://localhost:3000/api/lists/${testKey}/submissions`, {
+    fetch(`http://localhost:3000/api/lists/${key}/submissions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -27,10 +32,18 @@ export function DetailsPage() {
       .then(resp => resp.json())
       .then((data) => {
         setData(data);
+        navigate(`/list/${key}/entry/${data.key}`);
       });
   }
 
-  console.log(data);
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/lists/${key}`)
+      .then(resp => resp.json())
+      .then(data => setForLooping(data));
+  }, [key]);
+
+  console.log(dataForLooping);
+
   return (
     <>
       <div>
@@ -138,15 +151,51 @@ export function DetailsPage() {
             </form>
           </div>
 
-          {/* Container for List Rendering */}
-          { data
-            && (
-              <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
-                <h1>here shows guest list</h1>
-                {/* http://localhost:3000/api/lists/wwlse7/submission[0] */}
+          <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
+            <h1>here shows guest list</h1>
+            {/* http://localhost:3000/api/lists/wwlse7/submission[0] */}
+            <ul>
+              {/* Container for List Rendering */}
+              { dataForLooping && (
+                <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 space-y-6">
+                  <h1 className="text-2xl font-bold text-gray-800 text-center">
+                    Gästeliste
+                  </h1>
 
-              </div>
-            )}
+                  <ul className="space-y-4">
+                    {dataForLooping.submissions
+                      && dataForLooping.submissions.map(submission => (
+                        <li
+                          key={submission.id}
+                          onClick={e => handleClick(submission.key)}
+                          className="flex flex-col bg-gray-50 border border-gray-200 rounded-xl p-4 hover:bg-gray-100 transition"
+                        >
+                          <div className="flex justify-between items-center">
+                            <span className="font-semibold text-gray-800">
+                              {submission.submittedBy}
+                            </span>
+                            <span className="text-sm text-gray-500">
+                              {submission.attendees}
+                              {' '}
+                              Teilnehmer
+                            </span>
+                          </div>
+
+                          <div className="mt-1 text-gray-600">
+                            bringt
+                            {' '}
+                            <span className="italic text-gray-700">
+                              {submission.bringing || '—'}
+                            </span>
+                          </div>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+
+              )}
+            </ul>
+          </div>
 
         </div>
 
