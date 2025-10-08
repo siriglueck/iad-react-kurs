@@ -12,6 +12,7 @@ export default function StartPage() {
     <div>
 
       <div className="min-h-screen bg-stone-100 flex flex-col justify-center items-center gap-5 p-1">
+        <img src="/list-logo.svg" alt="Logo" className="w-32 h-32" />
         <h1 className="text-8xl font-semibold text-center text-stone-700"> liste.live</h1>
         <p className="text-stone-500"> Organize your party - Nie wieder doppelt einkaufen.</p>
         <form action={handleSubmit} className="bg-white p-6 rounded-xl shadow-sm w-full max-w-sm space-y-4">

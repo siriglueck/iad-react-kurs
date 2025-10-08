@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router';
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 export function DetailsPage() {
   const { key, submissionkey } = useParams();
   const [submissionList, setSubmissionList] = useState(null);
@@ -15,7 +17,7 @@ export function DetailsPage() {
 
   // to be called and rerendered
   async function fetchSubmissions() {
-    const resp = await fetch(`http://localhost:3000/api/lists/${key}`);
+    const resp = await fetch(`${backendUrl}/lists/${key}`);
     const data = await resp.json();
     setSubmissionList(data);
   }
@@ -69,7 +71,7 @@ export function DetailsPage() {
     }
 
     if (!currentSubmission && !hasErrors) {
-      const resp = await fetch(`http://localhost:3000/api/lists/${key}/submissions`, {
+      const resp = await fetch(`${backendUrl}/lists/${key}/submissions`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -89,7 +91,7 @@ export function DetailsPage() {
     }
 
     else if (currentSubmission && !hasErrors) {
-      const resp = await fetch(`http://localhost:3000/api/submissions/${currentSubmission.key}`, {
+      const resp = await fetch(`${backendUrl}/submissions/${currentSubmission.key}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -112,7 +114,7 @@ export function DetailsPage() {
 
   function handleDelete(s) {
     console.log(s);
-    fetch(`http://localhost:3000/api/submissions/${s.id}`, {
+    fetch(`${backendUrl}/submissions/${s.id}`, {
       method: 'DELETE',
     })
       .then(() => {

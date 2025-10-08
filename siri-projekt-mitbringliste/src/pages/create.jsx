@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 export function CreatePage() {
   const { title } = useParams();
-  const [data, setData] = useState(null);
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
 
@@ -31,7 +32,7 @@ export function CreatePage() {
     }
 
     if (!hasErrors) {
-      fetch('http://localhost:3000/api/lists', {
+      fetch(`${backendUrl}/lists`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -44,7 +45,6 @@ export function CreatePage() {
       })
         .then(resp => resp.json())
         .then((data) => {
-          setData(data);
           navigate(`/list/${data.key}`);
         });
     }
