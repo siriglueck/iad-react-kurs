@@ -280,9 +280,9 @@ export function DetailsPage() {
           {/* Gast List */}
           <div className="w-full max-w-xl bg-white rounded-2xl shadow-lg p-8">
             { submissionList && (
-              <div>
-                <span className="text-2xl font-semibold text-stone-800 mb-4 text-center">Gästeliste</span>
-                <ul className="space-y-4">
+              <div className="text-center">
+                <span className="text-2xl font-semibold text-stone-800 mb-2 text-center">Gästeliste</span>
+                <ul className="space-y-4 my-4">
                   {/* List Rendering */}
                   {submissionList.submissions
                     && submissionList.submissions.map(s => (
