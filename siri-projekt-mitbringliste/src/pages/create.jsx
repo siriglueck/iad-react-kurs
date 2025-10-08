@@ -5,30 +5,49 @@ export function CreatePage() {
   const { title } = useParams();
   const [data, setData] = useState(null);
   const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
 
   function handleCreateList(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const partyList = Object.fromEntries(formData);
+    let hasErrors = false;
 
-    console.log(partyList);
+    // validate title input
+    if (!partyList.title.trim()) {
+      setErrors(err => ({ ...err, title: 'muss ausgefüllt werden' }));
+      hasErrors = true;
+    }
+    else {
+      setErrors(err => ({ ...err, title: '' }));
+    }
+    // validate email inputs
+    if (!partyList.email.trim()) {
+      setErrors(err => ({ ...err, email: 'muss ausgefüllt werden' }));
+      hasErrors = true;
+    }
+    else {
+      setErrors(err => ({ ...err, email: '' }));
+    }
 
-    fetch('http://localhost:3000/api/lists', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        title: partyList.title,
-        description: partyList.description,
-        email: partyList.email,
-      }),
-    })
-      .then(resp => resp.json())
-      .then((data) => {
-        setData(data);
-        navigate(`/list/${data.key}`);
-      });
+    if (!hasErrors) {
+      fetch('http://localhost:3000/api/lists', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: partyList.title,
+          description: partyList.description,
+          email: partyList.email,
+        }),
+      })
+        .then(resp => resp.json())
+        .then((data) => {
+          setData(data);
+          navigate(`/list/${data.key}`);
+        });
+    }
   }
 
   return (
@@ -42,12 +61,13 @@ export function CreatePage() {
             Fülle die Details aus und teile deine Liste mit deinen Gästen.
           </p>
 
-          <form onSubmit={handleCreateList} className="space-y-4">
+          <form onSubmit={handleCreateList} noValidate className="space-y-4">
             <div className="flex flex-col">
               <label htmlFor="title" className="text-stone-700 mb-1 font-medium">
                 Titel der Liste
                 {' '}
                 <span className="text-red-500">*</span>
+                {errors.title && <span className="text-red-500 font-semibold">{errors.title}</span>}
               </label>
               <input
                 id="title"
@@ -79,6 +99,7 @@ export function CreatePage() {
                 Deine E-Mail-Adresse
                 {' '}
                 <span className="text-red-500">*</span>
+                {errors.email && <span className="text-red-500 font-semibold">{errors.email}</span>}
               </label>
               <input
                 id="email"
@@ -98,12 +119,6 @@ export function CreatePage() {
           </form>
         </div>
 
-        { data
-          && (
-            <div>
-              <h1>Tessssssssssssssssssssssssssssssssssssssssssssssssssst</h1>
-            </div>
-          )}
       </div>
 
     </>

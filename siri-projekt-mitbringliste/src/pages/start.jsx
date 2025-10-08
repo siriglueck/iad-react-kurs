@@ -13,8 +13,7 @@ export default function StartPage() {
 
       <div className="min-h-screen bg-stone-100 flex flex-col justify-center items-center gap-5 p-1">
         <h1 className="text-8xl font-semibold text-center text-stone-700"> liste.live</h1>
-        <p className="text-stone-500"> Organize your party</p>
-        <p className="text-stone-500"> alle sehen sofort, was noch fehlt und was schon besorgt wurde. Nie wieder doppelt einkaufen!</p>
+        <p className="text-stone-500"> Organize your party - Nie wieder doppelt einkaufen.</p>
         <form action={handleSubmit} className="bg-white p-6 rounded-xl shadow-sm w-full max-w-sm space-y-4">
           <div>
             <label htmlFor="title" className="block text-stone-600 text-sm mb-1">Titel deiner Liste</label>
